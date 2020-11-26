@@ -8,7 +8,7 @@ function(
     cellPhone,
     phone,
     address,
-    mail,
+    email,
     registerDate,
     active)
 {
@@ -20,7 +20,10 @@ function(
     this.cellPhone = cellPhone;
     this.phone = phone;
     this.address = address;
-    this.mail = mail;
+    this.email = email;
     this. registerDate = registerDate;
     this.active = active;
 }
+
+
+var getAllCustomersQuery = "SELECT * FROM Customer;" 
