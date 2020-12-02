@@ -11,9 +11,11 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.get('/customers', customerController.allCustomers);
+app.get('/customer/:idCustomer', customerController.getCustomerById);
 
 var puerto = '8080';
+var ip = '0.0.0.0'
 
-app.listen(puerto, function(){
+app.listen(puerto, ip, function(){
     console.log("Escuchando pedidos del puerto "+puerto);
 });

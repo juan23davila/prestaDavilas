@@ -24,6 +24,3 @@ function(
     this. registerDate = registerDate;
     this.active = active;
 }
-
-
-var getAllCustomersQuery = "SELECT * FROM Customer;" 
