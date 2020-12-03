@@ -1,7 +1,7 @@
 var modeloCliente = 
 function(
     idCustomer,
-    identType,
+    customerType,
     numIdent,
     custName,
     custLastName,
@@ -13,7 +13,7 @@ function(
     active)
 {
     this.idCustomer = idCustomer;
-    this.identType = identType;
+    this.customerType = customerType;
     this.numIdent = numIdent;
     this.custName = custName;
     this.custLastName = custLastName;

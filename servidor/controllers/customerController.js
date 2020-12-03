@@ -41,31 +41,71 @@ function getCustomerById(req, res){
  * Insert new Customer
  */
 function insCustomer(req, res){
-    var insCustomerQuery = "INSERT INTO `Customer` (`idCustomer`, `identType`, `numIdent`, `custName`, `custLastName`, `cellPhone`, `phone`, `address`, `email`, `registerDate`, `active`) VALUES (NULL, '1', '29200111', 'Yaneth', 'Mejia Chica', '3154069867', NULL, 'Calle 18 # 14 - 50 local 3', 'yaneth05mejia@hotmail.com', '2020-11-27 13:50:45', 'Y');"
+    var newCustomer = req.body;
+    var customerType = newCustomer.customerType;
+    var numIdent = "'"+newCustomer.numIdent+"'";
+    var custName = "'"+newCustomer.custName+"'";
+    var custLastName = "'"+newCustomer.custLastName+"'";
+    var cellPhone = newCustomer.cellPhone ? "'"+newCustomer.cellPhone+"'" : null;
+    var phone = newCustomer.phone ? "'"+newCustomer.phone+"'" : null;
+    var address = newCustomer.address ? "'"+newCustomer.address+"'" : null;
+    var email = newCustomer.email ? "'"+newCustomer.email+"'" : null;
+    var registerDate = "'"+newCustomer.registerDate+"'";
+    var insCustomerQuery = "INSERT INTO Customer (\n"+
+                                "customerType,\n"+
+                                "numIdent,\n"+
+                                "custName,\n"+
+                                "custLastName,\n"+
+                                "cellPhone,\n"+
+                                "phone,\n"+
+                                "address,\n"+
+                                "email,\n"+
+                                "registerDate)\n"+
+                            "VALUES (\n"+
+                                customerType+",\n"+
+                                numIdent+",\n"+
+                                custName+",\n"+
+                                custLastName+",\n"+
+                                cellPhone+",\n"+
+                                phone+",\n"+
+                                address+",\n"+
+                                email+",\n"+
+                                registerDate+")";
+
+    console.log(insCustomerQuery);
+    connection.query(insCustomerQuery, function(error, result, fields){
+        if(error){
+            console.log("Hubo un error al insertar cliente nuevo", error.message);
+            return res.status(404).send("Hubo un error en la consulta insCustomer");
+        }
+
+        res.json(result);
+    });
 }
 
 /**
  * Allow update info from customer
  */
 function updCustomer(req, res){
-    var updCustomerQuery = "UPDATE `Customer` SET `numIdent` = '1094555555', `custName` = 'Andrés Felipe' WHERE `Customer`.`idCustomer` = 3"
+    var updCustomerQuery = "UPDATE 'Customer' SET 'numIdent' = '1094555555', 'custName' = 'Andrés Felipe' WHERE 'Customer'.'idCustomer' = 3"
 }
 
 /**
  * Deactivate customer
  */
 function deactivateCustomer(req, res){
-    var updCustomerQuery = "UPDATE `Customer` SET `active` = 'N' WHERE `Customer`.`idCustomer` = 3;"
+    var updCustomerQuery = "UPDATE 'Customer' SET 'active' = 'N' WHERE 'Customer'.'idCustomer' = 3;"
 }
 
 /**
  * Activate customer
  */
 function activateCustomer(req, res){
-    var updCustomerQuery = "UPDATE Customer SET `active` = 'Y' WHERE `Customer`.`idCustomer` = 3;"
+    var updCustomerQuery = "UPDATE Customer SET 'active' = 'Y' WHERE 'Customer'.'idCustomer' = 3;"
 }
 
 module.exports = {
     allCustomers : allCustomers,
-    getCustomerById : getCustomerById
+    getCustomerById : getCustomerById,
+    insCustomer : insCustomer
 }

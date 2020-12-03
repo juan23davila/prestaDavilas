@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 
 app.get('/customers', customerController.allCustomers);
 app.get('/customer/:idCustomer', customerController.getCustomerById);
+app.post('/customer', customerController.insCustomer);
 
 var puerto = '8080';
 var ip = '0.0.0.0'
