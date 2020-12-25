@@ -5,6 +5,18 @@ $(document).ready(function(){
   loadCustomerList();
 });
 
+$('.customerBtn').click(function(){
+  loadCustomerList();
+});
+
+$('.loansBtn').click(function(){
+  $('#actionSection').text("");
+  $('#content').text("");
+  $('#content').append("Lista de prestamos aquí");
+});
+
+$('.button-collapse').sideNav();
+
 function loadCustomerList(){
   var customerController = new CustomerController();
   customerController.getActiveCustomers();
@@ -12,7 +24,7 @@ function loadCustomerList(){
 }
 
 function displayAddCustomerButton(){
-  $('#actionSection').append("");
+  $('#actionSection').text("");
   var addCustomerButton = 
   '<a id="addCustomer" class="right linkOpt">\n'+
     '<i class="material-icons left iconOpt">add</i>\n'+
