@@ -2,18 +2,20 @@
  * Funcion que se ejecuta al iniciar la página
  */
 $(document).ready(function(){
-  loadCustomerList();
+  startApp();
+
+  $('.customerBtn').click(function(){
+    loadCustomerList();
+  });
+  
+  $('.loansBtn').click(function(){
+    $('#actionSection').text("");
+    $('#content').text("");
+    $('#content').append("Lista de prestamos aquí");
+  });
 });
 
-$('.customerBtn').click(function(){
-  loadCustomerList();
-});
 
-$('.loansBtn').click(function(){
-  $('#actionSection').text("");
-  $('#content').text("");
-  $('#content').append("Lista de prestamos aquí");
-});
 
 $('.button-collapse').sideNav();
 
@@ -26,14 +28,21 @@ function loadCustomerList(){
 function displayAddCustomerButton(){
   $('#actionSection').text("");
   var addCustomerButton = 
-  '<a id="addCustomer" class="right linkOpt">\n'+
-    '<i class="material-icons left iconOpt">add</i>\n'+
+  '<a class="right linkOpt modal-trigger" href="#modalCrCustomer">\n'+
+    '<i class="material-icons left iconOpt">person_add</i>\n'+
     'Agregar\n'+
   '</a>\n';
   $('#actionSection').append(addCustomerButton);
+}
 
-  $('#addCustomer').click(function(){
-    alert("Se desplegará formulario para agregar cliente");
-  });
+function startApp(){
+  // Inicialize menu
+  var navbarUtilities = new NavbarUtilities();
+  navbarUtilities.createNavBar();
+
+  // Start load customer list
+  loadCustomerList();
+  //inicialice the modals
+  $('.modal').modal();
 }
 
