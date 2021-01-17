@@ -21,6 +21,7 @@ $(document).ready(function(){
 
   //inicialice the modals
   $('.modal').modal();
+  $('.tabs').tabs();
 });
 
 function loadCustomerList(){

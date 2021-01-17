@@ -9,9 +9,7 @@ function TableUtilities(){
   this.createTable = function(header, attrs, data){
     var contentTable = "";
 
-    contentTable += '<div class="mdc-data-table">\n';
-    contentTable += ' <div class="mdc-data-table__table-container">\n';
-    contentTable += '   <table class="mdc-data-table__table" aria-label="Dessert calories">\n';
+    contentTable += '   <table class="striped" aria-label="Dessert calories">\n';
     contentTable += '     <thead>\n';
     contentTable += '       <tr class="mdc-data-table__header-row">\n';
     contentTable +=           this.createTableHeader(header);
@@ -21,8 +19,6 @@ function TableUtilities(){
     contentTable +=         this.createTableContent(attrs, data);
     contentTable += '     </tbody>\n';
     contentTable += '   </div>\n';
-    contentTable += ' </div>\n';
-    contentTable += '</div>';
 
     return contentTable;
   }

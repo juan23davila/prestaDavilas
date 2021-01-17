@@ -10,9 +10,9 @@ function NavbarUtilities(){
     contentNavBar += '     <a href="#" class="button-collapse" data-activates="mobile-nav">\n';
     contentNavBar += '       <i class="material-icons">menu</i>\n';
     contentNavBar += '     </a>\n';
-    contentNavBar += '     <ul class="right hide-on-med-and-down">\n';
-    contentNavBar += '       <li><a href="#" class="customerBtn">Clientes</a></li>\n';
-    contentNavBar += '       <li><a href="#" class="loansBtn">Prestamos</a></li>\n';
+    contentNavBar += '     <ul class="right hide-on-med-and-down tabs tabs-transparent">\n';
+    contentNavBar += '       <li class="tab"><a href="#" class="customerBtn">Clientes</a></li>\n';
+    contentNavBar += '       <li class="tab"><a href="#" class="loansBtn">Prestamos</a></li>\n';
     contentNavBar += '     </ul>';
     contentNavBar += '     <ul id="mobile-nav" class="side-nav">\n';
     contentNavBar += '       <li><a href="#" class="customerBtn">Clientes</a></li>\n';

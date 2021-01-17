@@ -16,6 +16,20 @@ a.linkOpt {
   cursor: pointer;
 }
 
+.nav-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+ul.tabs {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.brand-logo {
+  bottom: 2px;
+}
+
 #littleRow {
   margin-bottom: 4px;
 }
