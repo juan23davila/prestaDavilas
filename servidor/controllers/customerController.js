@@ -1,4 +1,6 @@
+require('../utilities/dateUtilities');
 var connection = require('../lib/connectionBD');
+var lodash = require('lodash');
 
 /**
  * Obtiene todos los clientes
@@ -13,7 +15,7 @@ function allCustomers(req, res){
             return res.status(404).send("Hubo un error en la consulta allCustomers");
         }
 
-        if(result.lenght == 0){
+        if(result.length == 0){
             return res.status(404).json("No se encontraron clientes registrados");
         }
 
@@ -39,7 +41,7 @@ function getCustomerById(req, res){
             return res.status(500).send("Hubo un error en la consulta getCustomerById");
         }
         
-        if(result.lenght == 0){
+        if(result.length == 0){
             return res.status(404).json("No existe cliente con el identificador "+customerId);
         }
         
@@ -53,52 +55,58 @@ function getCustomerById(req, res){
  */
 function insCustomer(req, res){
     var newCustomer = req.body;
-    var numIdent = "'"+newCustomer.numIdent+"'";
-    if(!numIdent){
+    if(!newCustomer.numIdent){
         return res.status(422).json('El campo "Número de identificación" debe contener un valor.');
     }
-    if(isNaN(numIdent)){
-        return res.status(422).json('El campo "Número de identificación" debe ser numérico.');
+    if(isNaN(newCustomer.numIdent)){
+        return res.status(422).json('El campo "Número de identificación" debe ser numérico: '+newCustomer.numIdent);
     }
-    var custName = "'"+newCustomer.custName+"'";
-    if(newCustomer.custName.lenght < 3){
+    var numIdent = "'"+newCustomer.numIdent+"'";
+
+    if(newCustomer.custName.length < 3){
         return res.status(422).json('El nombre debe contener al menos 3 caracteres');
     }
-    var custLastName = "'"+newCustomer.custLastName+"'";
-    if(newCustomer.custLastName.lenght < 3){
+    var custName = "'"+newCustomer.custName+"'";
+    
+    if(newCustomer.custLastName.length < 3){
         return res.status(422).json('El apellido debe contener al menos 3 caracteres');
     }
+    var custLastName = "'"+newCustomer.custLastName+"'";
     var cellPhone = newCustomer.cellPhone ? "'"+newCustomer.cellPhone+"'" : null;
     var phone = newCustomer.phone ? "'"+newCustomer.phone+"'" : null;
+    var phoneTwo = newCustomer.phoneTwo ? "'"+newCustomer.phoneTwo+"'" : null;
     var address = newCustomer.address ? "'"+newCustomer.address+"'" : null;
     var email = newCustomer.email ? "'"+newCustomer.email+"'" : null;
-    var registerDate = "'"+newCustomer.registerDate+"'";
+
+    const dateUtilities = require('../utilities/dateUtilities');
+
+
     var insCustomerQuery = "INSERT INTO Customer (\n"+
                                 "numIdent,\n"+
                                 "custName,\n"+
                                 "custLastName,\n"+
                                 "cellPhone,\n"+
                                 "phone,\n"+
+                                "phoneTwo,\n"+
                                 "address,\n"+
-                                "email,\n"+
-                                "registerDate)\n"+
+                                "email)\n"+
                             "VALUES (\n"+
                                 numIdent+",\n"+
                                 custName+",\n"+
                                 custLastName+",\n"+
                                 cellPhone+",\n"+
                                 phone+",\n"+
+                                phoneTwo+",\n"+
                                 address+",\n"+
-                                email+",\n"+
-                                registerDate+")";
-
+                                email+")";
+                                
     connection.query('SELECT * FROM Customer WHERE numIdent = '+numIdent,
     function(errorQuery, resultQuery, fieldsQuery){
         if(errorQuery){
             return res.status(500).json("Error al consultar si existia cliente en insCustomer: "+error);
         }
-        if(resultQuery.lenght != 0){
-            return res.status(422).json("Ya existe un cliente con el nùmero de documento "+numIdent);
+        if(resultQuery.length > 0){
+            return res.status(422).json("Ya existe un cliente con el número de documento "+numIdent);
         }
         connection.query(insCustomerQuery, function(error, result, fields){
             if(error){

@@ -1,8 +1,12 @@
+var customerController = new CustomerController();
+var buttonsUtilities = new ButtonsUtilities();
 /**
  * Funcion que se ejecuta al iniciar la página
  */
 $(document).ready(function(){
   startApp();
+
+  $('.button-collapse').sideNav();
 
   $('.customerBtn').click(function(){
     loadCustomerList();
@@ -13,36 +17,24 @@ $(document).ready(function(){
     $('#content').text("");
     $('#content').append("Lista de prestamos aquí");
   });
+
+
+  //inicialice the modals
+  $('.modal').modal();
 });
 
-
-
-$('.button-collapse').sideNav();
-
 function loadCustomerList(){
-  var customerController = new CustomerController();
   customerController.getActiveCustomers();
-  displayAddCustomerButton();
-}
-
-function displayAddCustomerButton(){
-  $('#actionSection').text("");
-  var addCustomerButton = 
-  '<a class="right linkOpt modal-trigger" href="#modalCrCustomer">\n'+
-    '<i class="material-icons left iconOpt">person_add</i>\n'+
-    'Agregar\n'+
-  '</a>\n';
-  $('#actionSection').append(addCustomerButton);
+  buttonsUtilities.createAddCustomerButton();
 }
 
 function startApp(){
+  
   // Inicialize menu
   var navbarUtilities = new NavbarUtilities();
   navbarUtilities.createNavBar();
 
   // Start load customer list
   loadCustomerList();
-  //inicialice the modals
-  $('.modal').modal();
 }
 
