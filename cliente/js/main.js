@@ -1,5 +1,4 @@
 var customerController = new CustomerController();
-var buttonsUtilities = new ButtonsUtilities();
 /**
  * Funcion que se ejecuta al iniciar la página
  */
@@ -21,12 +20,12 @@ $(document).ready(function(){
 
   //inicialice the modals
   $('.modal').modal();
+  // Para que se muestre las raya inferior del NAVBAR
   $('.tabs').tabs();
 });
 
 function loadCustomerList(){
   customerController.getActiveCustomers();
-  buttonsUtilities.createAddCustomerButton();
 }
 
 function startApp(){

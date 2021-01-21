@@ -14,11 +14,20 @@ header {
 
 a.linkOpt {
   cursor: pointer;
+  margin-left: 2em;
 }
 
 .nav-wrapper {
   display: flex;
   align-items: flex-end;
+}
+
+.rowTable {
+  cursor: pointer;
+}
+
+.rowTable:hover {
+  background-color: #039be5 !important;
 }
 
 ul.tabs {

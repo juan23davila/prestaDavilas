@@ -5,13 +5,16 @@ function ModeloCliente()
 {
     this.getCustomers = function(){
         $.getJSON(server+"customers/", function(data){
-            var clientes = data['clientes'];
-            var tableHeader = ["Cédula", "Nombre", "Apellido", "Celular"];
-            var attrs = ["numIdent", "custName", "custLastName", "cellPhone"];
+            let clientes = data['clientes'];
+            let tableHeader = ["Cédula", "Nombre", "Apellido", "Celular"];
+            let attrs = ["numIdent", "custName", "custLastName", "cellPhone"];
+            let idTable = 'customerList';
+            let nameTR = 'idCustomer';
             var tableUtilities = new TableUtilities();
             $('#content').text("");
-            var contentTable = tableUtilities.createTable(tableHeader,attrs,clientes);
+            var contentTable = tableUtilities.createTable(tableHeader,attrs,clientes, idTable, nameTR);
             $('#content').append(contentTable);
+            tableUtilities.createEventClick(idTable);
         });
     }
     
@@ -31,6 +34,14 @@ function ModeloCliente()
                         }
                     },
             dataType : 'json'
+        });
+    }
+
+    this.getCustomer = function (idCustomer) {
+        $.getJSON(server+"customer/"+idCustomer, function(data){
+            $('#content').text("");
+            $('#content').append('<label>Nombre</label><p>'+data[0]['custName']+'</p>');
+            $('#content').append(JSON.stringify(data));
         });
     }
 }
