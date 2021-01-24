@@ -42,3 +42,14 @@ ul.tabs {
 #littleRow {
   margin-bottom: 4px;
 }
+
+.UserInfo {
+  margin-top: 2em;
+}
+
+.box {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}

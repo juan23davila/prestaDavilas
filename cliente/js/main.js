@@ -1,4 +1,6 @@
-var customerController = new CustomerController();
+let customerController = new CustomerController();
+let loanController = new LoanController();
+
 /**
  * Funcion que se ejecuta al iniciar la página
  */
@@ -7,14 +9,12 @@ $(document).ready(function(){
 
   $('.button-collapse').sideNav();
 
-  $('.customerBtn').click(function(){
-    loadCustomerList();
+  $('#customerBtn').click(function(){
+    customerController.getActiveCustomers();
   });
   
-  $('.loansBtn').click(function(){
-    $('#actionSection').text("");
-    $('#content').text("");
-    $('#content').append("Lista de prestamos aquí");
+  $('#loansBtn').click(function(){
+    loanController.getActiveLoans();
   });
 
 
@@ -24,17 +24,10 @@ $(document).ready(function(){
   $('.tabs').tabs();
 });
 
-function loadCustomerList(){
-  customerController.getActiveCustomers();
-}
-
 function startApp(){
   
   // Inicialize menu
   var navbarUtilities = new NavbarUtilities();
   navbarUtilities.createNavBar();
-
-  // Start load customer list
-  loadCustomerList();
+  customerController.getActiveCustomers();
 }
-

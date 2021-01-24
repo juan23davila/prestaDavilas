@@ -4,6 +4,7 @@
 var server = 'http://0.0.0.0:8080/';
 let customerModel = new ModeloCliente();
 var buttonsUtilities = new ButtonsUtilities();
+let navbarUtilities = new NavbarUtilities();
 let globalIdCustomer = 0;
 
 function CustomerController(){
@@ -12,6 +13,7 @@ function CustomerController(){
     this.getActiveCustomers = function(){
         customerModel.getCustomers();
         buttonsUtilities.createAddCustomerButton();
+        navbarUtilities.reestablishBootomBar();
     }
 
     // Set new customer
@@ -49,9 +51,11 @@ function CustomerController(){
         customerModel.postCustomer(newCustomer);
     }
 
-    this.getCustomer = function (idCustomer) {
+    this.getCustomer = async function (idCustomer) {
         globalIdCustomer = idCustomer;
-        customerModel.getCustomer(idCustomer);
+        navbarUtilities.removeBottonMarignNavBar();
+        const resi = await customerModel.getCustomer(idCustomer);
+        customerModel.getLoansFromUserId();
         buttonsUtilities.createEditRemoveCustomerButton();
     }
 }
