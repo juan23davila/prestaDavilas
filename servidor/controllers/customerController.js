@@ -124,12 +124,13 @@ function insCustomer(req, res){
  */
 function updCustomer(req, res){
     var customerToUpd = req.body;
-    var idCustomer = req.params.idCustomer;
+    var idCustomer = "'"+req.params.idCustomer+"'";
     var numIdent = "'"+customerToUpd.numIdent+"'";
     var custName = "'"+customerToUpd.custName+"'";
     var custLastName = "'"+customerToUpd.custLastName+"'";
     var cellPhone = customerToUpd.cellPhone ? "'"+customerToUpd.cellPhone+"'" : null;
     var phone = customerToUpd.phone ? "'"+customerToUpd.phone+"'" : null;
+    var phoneTwo = customerToUpd.phoneTwo ? "'"+customerToUpd.phoneTwo+"'" : null;
     var address = customerToUpd.address ? "'"+customerToUpd.address+"'" : null;
     var email = customerToUpd.email ? "'"+customerToUpd.email+"'" : null;
     var updCustomerQuery = "UPDATE Customer\n"+
@@ -138,6 +139,7 @@ function updCustomer(req, res){
                            "    custLastName = "+custLastName+",\n"+
                            "    cellPhone = "+cellPhone+",\n"+
                            "    phone = "+phone+",\n"+
+                           "    phoneTwo = "+phoneTwo+",\n"+
                            "    address = "+address+",\n"+
                            "    email = "+email+"\n"+
                            "WHERE Customer.idCustomer = "+idCustomer;
@@ -146,7 +148,7 @@ function updCustomer(req, res){
         function (error, results, fields){
             if(error){
                 console.log("Hubo un error al actualizar el cliente: "+idCustomer, error.message);
-                return res.status(404).send("Hubo un error en la consulta updCustomer");
+                return res.send("Hubo un error en la consulta updCustomer");
             }
 
             res.json(results);

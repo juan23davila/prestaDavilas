@@ -1,6 +1,7 @@
 //ip and port of the backedServer
 var server = 'http://0.0.0.0:8080/';
 let userData = null;
+var buttonsUtilities = new ButtonsUtilities();
 
 function ModeloCliente()
 {
@@ -32,6 +33,27 @@ function ModeloCliente()
                         }
                         else{
                             alert("falló insertando el usuario con status:"+status+", mensaje: "+response.message);
+                        }
+                    },
+            dataType : 'json'
+        });
+    }
+
+
+    this.putCustomer = function(customerToSave, idCustomer) {
+        $.ajax({
+            url : server+"customer/"+idCustomer,
+            type : 'PUT',
+            data: customerToSave,
+            success : function(res){
+                        alert("Se actulizó correctamente el usuario");
+                      },
+            error : function(response, status, xhr){
+                        if(response.status == 422){
+                            alert("Falló la actualizacion del usuario: "+response.responseText);
+                        }
+                        else{
+                            alert("falló actualizando el usuario con status:"+status+", mensaje: "+response.message);
                         }
                     },
             dataType : 'json'
@@ -88,10 +110,11 @@ function ModeloCliente()
                 infoCustomer += '   </div>\n';
                 infoCustomer += '</div>\n';
                 $('#content').append(infoCustomer);
+                buttonsUtilities.createEditRemoveCustomerButton(data);
             });
             setTimeout(()=> {
                 resolve('resolved');
-            }, 200);
+            }, 500);
         });
         
     }

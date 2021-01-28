@@ -11,12 +11,12 @@ function NavbarUtilities(){
     contentNavBar += '       <i class="material-icons">menu</i>\n';
     contentNavBar += '     </a>\n';
     contentNavBar += '     <ul class="right hide-on-med-and-down tabs tabs-transparent">\n';
-    contentNavBar += '       <li class="tab"><a href="#" id="customerBtn">Clientes</a></li>\n';
-    contentNavBar += '       <li class="tab"><a href="#" id="loansBtn">Prestamos</a></li>\n';
+    contentNavBar += '       <li class="tab"><a href="#" class="customerBtn">Clientes</a></li>\n';
+    contentNavBar += '       <li class="tab"><a href="#" class="loansBtn">Prestamos</a></li>\n';
     contentNavBar += '     </ul>';
     contentNavBar += '     <ul id="mobile-nav" class="side-nav">\n';
-    contentNavBar += '       <li><a href="#" id="customerBtn">Clientes</a></li>\n';
-    contentNavBar += '       <li><a href="#" id="loansBtn">Prestamos</a></li>\n';
+    contentNavBar += '       <li><a href="#" class="customerBtn">Clientes</a></li>\n';
+    contentNavBar += '       <li><a href="#" class="loansBtn">Prestamos</a></li>\n';
     contentNavBar += '     </ul>';
     contentNavBar += '   </div>\n';
     contentNavBar += ' </div>\n';

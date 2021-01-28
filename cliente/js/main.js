@@ -9,15 +9,13 @@ $(document).ready(function(){
 
   $('.button-collapse').sideNav();
 
-  $('#customerBtn').click(function(){
+  $('.customerBtn').click(function(){
     customerController.getActiveCustomers();
   });
   
-  $('#loansBtn').click(function(){
+  $('.loansBtn').click(function(){
     loanController.getActiveLoans();
   });
-
-
   //inicialice the modals
   $('.modal').modal();
   // Para que se muestre las raya inferior del NAVBAR
