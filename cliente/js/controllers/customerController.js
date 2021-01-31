@@ -16,22 +16,28 @@ function CustomerController(){
     }
 
     // Set new customer
-    this.setNewCustomer = function (customer) {
+    this.setNewCustomer = async function (customer) {
         let newCustomer = readSerializedDate(customer)
-        customerModel.postCustomer(newCustomer);
+        await customerModel.postCustomer(newCustomer);
+        this.getActiveCustomers();
     }
 
     this.getCustomer = async function (idCustomer) {
         globalIdCustomer = idCustomer;
         navbarUtilities.removeBottonMarignNavBar();
-        const resi = await customerModel.getCustomer(idCustomer);
+        await customerModel.getCustomer(idCustomer);
         customerModel.getLoansFromUserId();
     }
 
-    this.updCustomer = function(customerToUpdData) {
+    this.updCustomer = async function(customerToUpdData) {
         let updCustomer = readSerializedDate(customerToUpdData);
-        console.log(updCustomer);
-        customerModel.putCustomer(updCustomer, globalIdCustomer);
+        await customerModel.putCustomer(updCustomer, globalIdCustomer);
+        this.getCustomer(globalIdCustomer);
+    }
+
+    this.rmCustomer = async function(idCustomer) {
+        await customerModel.rmCustomer(idCustomer);
+        this.getActiveCustomers();
     }
 }
 

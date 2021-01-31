@@ -31,12 +31,13 @@ function ButtonsUtilities() {
       '<i class="fas fa-user-edit fa-lg"></i>\n'+
       'Actualizar\n'+
     '</a>\n'+
-    '<a class="right linkOpt" id="reCustomerBtn">\n'+
+    '<a class="right linkOpt" id="rmCustomerBtn">\n'+
       '<i class="fas fa-user-times fa-lg"></i>\n'+
       'Eliminar\n'+
     '</a>\n';
     $('#actionSection').append(addCustomerButton);
 
+    // Click action to update
     $('#upCustomerBtn').click(function(){
       $('#modalGeneralContent').text("");
       $('#modalGeneralContent').append(modalContentUtilities.updCustomerForm(infoUsuario));
@@ -46,6 +47,11 @@ function ButtonsUtilities() {
         let customerToUpdData = $('#actualizarClienteForm').serializeArray();
         customerController.updCustomer(customerToUpdData);
       });
+    });
+
+    // Click action to remove
+    $('#rmCustomerBtn').click(function(){
+      customerController.rmCustomer(infoUsuario[0]['idCustomer']);
     });
   }
 }

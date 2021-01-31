@@ -28,7 +28,8 @@ function NavbarUtilities(){
 
 
   this.removeBottonMarignNavBar = function() {
-    $('#customerBtn').removeClass();
+    $('.customerBtn').removeClass('active');
+    $('.loansBtn').removeClass('active');
     $('.nav-wrapper').find('.indicator').removeClass('indicator').addClass('indicatore');
   }
   

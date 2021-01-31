@@ -21,42 +21,52 @@ function ModeloCliente()
     }
     
     this.postCustomer = function(customerToSave) {
-        $.post({
-            url : server+"customer",
-            data: customerToSave,
-            success : function(res){
-                        alert("Se insertó correctamente el usuario");
-                      },
-            error : function(response, status, xhr){
-                        if(response.status == 422){
-                            alert("Falló la inserción del usuario: "+response.responseText);
-                        }
-                        else{
-                            alert("falló insertando el usuario con status:"+status+", mensaje: "+response.message);
-                        }
-                    },
-            dataType : 'json'
+        new Promise(resolve => {
+            $.post({
+                url : server+"customer",
+                data: customerToSave,
+                success : function(res){
+                            alert("Se insertó correctamente el usuario");
+                        },
+                error : function(response, status, xhr){
+                            if(response.status == 422){
+                                alert("Falló la inserción del usuario: "+response.responseText);
+                            }
+                            else{
+                                alert("falló insertando el usuario con status:"+status+", mensaje: "+response.message);
+                            }
+                        },
+                dataType : 'json'
+            });
+            setTimeout(()=> {
+                resolve('resolved');
+            }, 1500);
         });
     }
 
 
     this.putCustomer = function(customerToSave, idCustomer) {
-        $.ajax({
-            url : server+"customer/"+idCustomer,
-            type : 'PUT',
-            data: customerToSave,
-            success : function(res){
-                        alert("Se actulizó correctamente el usuario");
-                      },
-            error : function(response, status, xhr){
-                        if(response.status == 422){
-                            alert("Falló la actualizacion del usuario: "+response.responseText);
-                        }
-                        else{
-                            alert("falló actualizando el usuario con status:"+status+", mensaje: "+response.message);
-                        }
-                    },
-            dataType : 'json'
+        new Promise(resolve => {
+            $.ajax({
+                url : server+"customer/"+idCustomer,
+                type : 'PUT',
+                data: customerToSave,
+                success : function(res){
+                            alert("Se actulizó correctamente el usuario");
+                        },
+                error : function(response, status, xhr){
+                            if(response.status == 422){
+                                alert("Falló la actualizacion del usuario: "+response.responseText);
+                            }
+                            else{
+                                alert("falló actualizando el usuario con status:"+status+", mensaje: "+response.message);
+                            }
+                        },
+                dataType : 'json'
+            });
+            setTimeout(()=> {
+                resolve('resolved');
+            }, 500);
         });
     }
 
@@ -117,6 +127,30 @@ function ModeloCliente()
             }, 500);
         });
         
+    }
+
+    this.rmCustomer = function(idCustomer) {
+        return new Promise(resolve => {
+            $.ajax({
+                url : server+"deactivatecustomer/"+idCustomer,
+                type : 'PUT',
+                success : function(res){
+                            alert("Se desactivó el usuario");
+                        },
+                error : function(response, status, xhr){
+                            if(response.status == 422){
+                                alert("Falló desactivación del usuario: "+response.responseText);
+                            }
+                            else{
+                                alert("falló desactivación del usuario con status:"+status+", mensaje: "+response.message);
+                            }
+                        },
+                dataType : 'json'
+            });
+            setTimeout(()=> {
+                resolve('resolved');
+            }, 500);
+        });
     }
 
     this.getLoansFromUserId = function(){
