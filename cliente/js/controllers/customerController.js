@@ -2,7 +2,8 @@
 
 //ip and port of the backedServer
 var server = 'http://0.0.0.0:8080/';
-let customerModel = new ModeloCliente();
+const loanController = new LoanController();
+const customerModel = new ModeloCliente();
 let navbarUtilities = new NavbarUtilities();
 let globalIdCustomer = 0;
 
@@ -26,7 +27,7 @@ function CustomerController(){
         globalIdCustomer = idCustomer;
         navbarUtilities.removeBottonMarignNavBar();
         await customerModel.getCustomer(idCustomer);
-        customerModel.getLoansFromUserId();
+        loanController.getLoansFromUserId(idCustomer);
     }
 
     this.updCustomer = async function(customerToUpdData) {

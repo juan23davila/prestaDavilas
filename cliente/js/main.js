@@ -1,5 +1,4 @@
-let customerController = new CustomerController();
-let loanController = new LoanController();
+const customerController = new CustomerController();
 
 /**
  * Funcion que se ejecuta al iniciar la página
@@ -7,13 +6,13 @@ let loanController = new LoanController();
 $(document).ready(function(){
   startApp();
 
-  $('.button-collapse').sideNav();
-
   $('.customerBtn').click(function(){
+    resetMainView();
     customerController.getActiveCustomers();
   });
   
   $('.loansBtn').click(function(){
+    resetMainView();
     loanController.getActiveLoans();
   });
   //inicialice the modals
@@ -28,4 +27,12 @@ function startApp(){
   var navbarUtilities = new NavbarUtilities();
   navbarUtilities.createNavBar();
   customerController.getActiveCustomers();
+}
+
+
+function resetMainView() {
+  $('#content2').text("");
+  $('#content').text("");
+  $('#actionSection').text("");
+  $('#actionSection2').text("");
 }

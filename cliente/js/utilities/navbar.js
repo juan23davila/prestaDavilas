@@ -24,6 +24,8 @@ function NavbarUtilities(){
 
     $('header').text("");
     $('header').append(contentNavBar);
+
+    $('.button-collapse').sideNav({closeOnClick : true});
   }
 
 

@@ -1,3 +1,12 @@
+var nombres_dias = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado")
+var nombres_meses = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic");
+let iniDate;
+let qMonths; // Cantidad de meses
+let qDays; // Cantidad de dias
+let amountLoan; // Valor del prestamo
+let percentajeLoan; // Porcentaje 
+
+
 function TableUtilities(){
 
   /**
@@ -40,7 +49,8 @@ function TableUtilities(){
     for (let i = 0; i < data.length; i++) {
       content += suh+'<tr class="mdc-data-table__row rowTable" name="'+data[i][nameTR]+'">\n';
       for (let j = 0; j < attrs.length; j++) {
-        content += suh+'  <td class="mdc-data-table__cell">'+data[i][attrs[j]]+'</td>\n';
+        dataFormated = this.setFormatData(data[i][attrs[j][0]], attrs[j][1]);
+        content += suh+'  <td class="mdc-data-table__cell">'+dataFormated+'</td>\n';
       }
       content += suh+'</tr>\n';
     }
@@ -52,6 +62,70 @@ function TableUtilities(){
     $('#'+idTable+' tr').click(function(){
       let idUser = $(this).attr('name');
       customerController.getCustomer(idUser);
-  });
+    });
   }
+
+
+  this.setFormatData = function(data, format) {
+    switch (format) {
+      case "s": // string, no format
+        return data
+      case "d": // date
+        return this.processDate(data);
+      case "t": // time
+        let timeDetail = getMonthsDaysBetweenDates(parseInt(data), iniDate);
+        qMonths = timeDetail[1];
+        qDays = timeDetail[2];
+        return timeDetail[0];
+      case "li": // loan interest
+        let amount = calculateInterest();
+        return formatToMoney(amount);
+      case "$a":
+        amountLoan = data;
+        return formatToMoney(data);
+      case "%a":
+        percentajeLoan = data;
+        return data;
+      default:
+        return data;
+    }
+  }
+
+  this.processDate = function(data){
+    var date = new Date(data * 1000);
+    iniDate = date;
+    dia_mes = date.getDate(); //dia del mes
+    mes = date.getMonth() + 1;
+    anio = date.getFullYear();
+    return dia_mes+"/"+nombres_meses[mes - 1]+"/"+anio;
+  }
+}
+
+/**
+ * Calcula lo que se le debe de intereses a un prestamo en particular
+ * @returns {number} valor que representa dinero que cuenta los intereses
+ */
+function calculateInterest(){
+  let monthCost = amountLoan * percentajeLoan / 100;
+  if(qDays > 0){
+    monthCost *= qMonths + 1;
+  }else{
+    monthCost *= qMonths;
+  }
+  return monthCost;
+}
+
+/**
+ * Da formato moneda a un valor.
+ * @param {number} value 
+ * @returns valor formateado a moneda.
+ */
+function formatToMoney(value) {
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  });
+
+  return formatter.format(value);
 }
