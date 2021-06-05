@@ -54,4 +54,26 @@ function ButtonsUtilities() {
       customerController.rmCustomer(infoUsuario[0]['idCustomer']);
     });
   }
+
+  this.createAddLoanButton = function (customerId) {
+    var addCustomerButton = 
+    '<a class="right linkOpt modal-trigger" id="crLoanBtn" href="#modalFormGeneral">\n'+
+      '<i class="material-icons left">account_balance</i>\n'+
+      'Crear nuevo contrato\n'+
+    '</a>';
+    $('#actionSection2').append(addCustomerButton);
+
+    // Accion adicionar prestamos
+    $('#crLoanBtn').click(function(){
+      $('#modalGeneralContent').text("");
+      $('#modalGeneralContent').append(modalContentUtilities.crLoanForm());
+      
+      // Se crea la opcion de submit del formulario de crear
+      $('#crearClienteForm').submit(function(event){
+        event.preventDefault();
+        let userNewData = $('#crearClienteForm').serializeArray();
+        customerController.setNewCustomer(userNewData);
+      });
+    });
+  }
 }

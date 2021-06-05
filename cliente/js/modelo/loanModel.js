@@ -6,10 +6,6 @@ var buttonsUtilities = new ButtonsUtilities();
 function LoanModel()
 {
     this.getLoansFromUserId = function(customerId){
-        $('#content2').text("");
-        $('#actionSection2').text("");
-        $('#actionSection2').append('<h3 class="center">Contratos</h3>');
-
         $.get({
             url : server+"loansbycustomer/"+customerId,
             success : function(data){

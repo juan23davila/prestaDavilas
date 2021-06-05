@@ -137,4 +137,23 @@ function ModalContentUtilities()
 
     return content;
   }
+
+  this.crLoanForm = function(params) {
+    let content = ''
+    content += '<h4>Agrega Contrato</h4>\n';
+    content += '<br>\n';
+    content += '  <form id="createLoanForm">\n';
+
+    // Dirección
+    content += '    <div class="input-field inline">\n';
+    content += '      <i class="fas fa-map-marked prefix"></i>\n';
+    content += '      <input type="text" name="address">\n';
+    content += '      <label for="address">Dirección</label>\n';
+    content += '    </div>\n';
+    content += '    <br>\n';
+
+    content += '  </form>\n';
+
+    return content;
+  }
 }

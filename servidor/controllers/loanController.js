@@ -6,7 +6,8 @@ function getLoansByCustomerId(req, res) {
     var idCustomer = req.params.idCustomer; // id Customer
 
     var loansByCustomerQuery = 
-                               "SELECT address, \n"+
+                               "SELECT idLoan, \n"+
+                               "       address, \n"+
                                "       valueNow, \n"+
                                "       UNIX_TIMESTAMP(payUntil) payUntil, \n"+
                                "       percentage, \n"+

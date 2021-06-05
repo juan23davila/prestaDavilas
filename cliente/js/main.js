@@ -4,7 +4,13 @@ const customerController = new CustomerController();
  * Funcion que se ejecuta al iniciar la página
  */
 $(document).ready(function(){
-  startApp();
+  const inCod = prompt("Por favor indique el código de seguridad");
+  if(inCod == "zjf8zs"){
+    startApp();
+  }else{
+    alert("Error al ingresar.");
+  }
+  
 
   $('.customerBtn').click(function(){
     resetMainView();
@@ -22,7 +28,6 @@ $(document).ready(function(){
 });
 
 function startApp(){
-  
   // Inicialize menu
   var navbarUtilities = new NavbarUtilities();
   navbarUtilities.createNavBar();
