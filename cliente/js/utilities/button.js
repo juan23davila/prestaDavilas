@@ -67,12 +67,53 @@ function ButtonsUtilities() {
     $('#crLoanBtn').click(function(){
       $('#modalGeneralContent').text("");
       $('#modalGeneralContent').append(modalContentUtilities.crLoanForm());
+
+      $('.datepicker').pickadate({
+        selectMonths: true,
+        selectYears: true,
+        today: 'Fecha de hoy',
+        clear: 'Borrar',
+        format: 'dd/mmm/yyyy',
+        setDefaultDate: true,
+        defaultDate: new Date(),
+        monthsFull: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+				monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+				weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sábado' ],
+				weekdaysShort: [ 'Dom', 'Lun', 'Mar', 'Mie', 'Juv', 'Vie', 'Sab' ]
+      });
+
+      $('.datepicker').on('mousedown', function(event) {
+        event.preventDefault();
+      });
+
+
+      // Jquery Dependency
+      $("input[data-type='currency']").on({
+        keyup: function() {
+          formatCurrency($(this));
+        },
+        blur: function() { 
+          formatCurrency($(this), "blur");
+        }
+      });
+
+      // Percentage validator
+      $("input[data-type='percentage']").on({
+        keyup: function() {
+          formatPercentage($(this));
+        },
+        blur: function() { 
+          formatPercentage($(this), "blur");
+        }
+      });
+
       
       // Se crea la opcion de submit del formulario de crear
-      $('#crearClienteForm').submit(function(event){
+      $('#createLoanForm').submit(function(event){
         event.preventDefault();
-        let userNewData = $('#crearClienteForm').serializeArray();
-        customerController.setNewCustomer(userNewData);
+        let loanNewData = $('#createLoanForm').serializeArray();
+        console.log(loanNewData);
+        //customerController.setNewCustomer(userNewData);
       });
     });
   }

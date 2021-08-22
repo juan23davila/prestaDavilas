@@ -10,13 +10,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(cors({
-    credentials : true,
-    origin : function(origin, callback){
-        callback(null, true);
-    },
-    maxAge : 86400
-}));
+app.use(cors());
 
 app.use(bodyParser.json());
 

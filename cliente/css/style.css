@@ -53,3 +53,8 @@ ul.tabs {
   display: flex;
   flex-direction: column;
 }
+
+.input-field.inlinej {
+  vertical-align: middle;
+  margin-left: 17px;
+}

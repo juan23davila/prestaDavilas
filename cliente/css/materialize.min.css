@@ -5251,7 +5251,7 @@ textarea.materialize-textarea + label:after,
 .input-field.inline {
   display: inline-block;
   vertical-align: middle;
-  margin-left: 5px;
+  margin-left: 17px;
 }
 .input-field.inline input,
 .input-field.inline .select-dropdown {
