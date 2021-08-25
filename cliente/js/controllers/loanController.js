@@ -20,7 +20,6 @@ function LoanController(){
   this.setNewLoan = async function (loan, customerId) {
     let newLoan = readSerializedLoanData(loan)
     newLoan['custId'] = customerId;
-    console.log(newLoan);
     await loanModel.postLoanFromUser(newLoan);
     //this.getLoansFromUserId(customerId);
   }

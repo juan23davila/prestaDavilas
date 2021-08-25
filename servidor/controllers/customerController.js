@@ -76,8 +76,6 @@ function insCustomer(req, res){
     var address = newCustomer.address ? "'"+newCustomer.address+"'" : null;
     var email = newCustomer.email ? "'"+newCustomer.email+"'" : null;
 
-    const dateUtilities = require('../utilities/dateUtilities');
-
 
     var insCustomerQuery = "INSERT INTO Customer (\n"+
                                 "numIdent,\n"+

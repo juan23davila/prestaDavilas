@@ -1,5 +1,5 @@
 //ip and port of the backedServer
-//var server = 'https://0.0.0.0:8080/';
+//var server = 'http://0.0.0.0:8080/';
 var server = 'https://server.prestadavilas.com/'
 let loanData = null;
 var buttonsUtilities = new ButtonsUtilities();
