@@ -1,6 +1,4 @@
-require('../utilities/dateUtilities');
 var connection = require('../lib/connectionBD');
-var lodash = require('lodash');
 
 /**
  * Obtiene todos los clientes

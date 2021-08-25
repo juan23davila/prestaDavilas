@@ -32,4 +32,29 @@ function LoanModel()
                     }
         });
     }
+
+
+    this.postLoanFromUser = function(loanToSave) {
+        new Promise(resolve => {
+            $.post({
+                url : server+"loan",
+                data: loanToSave,
+                success : function(res){
+                            alert("Se ingresó préstamo");
+                        },
+                error : function(response, status, xhr){
+                            if(response.status == 422){
+                                alert("Falló el registro del préstamo: "+response.responseText);
+                            }
+                            else{
+                                alert("falló ingresando el prestamo. Estado:"+status+", mensaje: "+response.message);
+                            }
+                        },
+                dataType : 'json'
+            });
+            setTimeout(()=> {
+                resolve('resolved');
+            }, 1500);
+        });
+    }
 }

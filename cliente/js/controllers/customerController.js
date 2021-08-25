@@ -1,7 +1,5 @@
 //require("../modelo/modeloCliente");
 
-//ip and port of the backedServer
-var server = 'http://0.0.0.0:8080/';
 const loanController = new LoanController();
 const customerModel = new ModeloCliente();
 let navbarUtilities = new NavbarUtilities();
@@ -18,7 +16,7 @@ function CustomerController(){
 
     // Set new customer
     this.setNewCustomer = async function (customer) {
-        let newCustomer = readSerializedDate(customer)
+        let newCustomer = readSerializedData(customer)
         await customerModel.postCustomer(newCustomer);
         this.getActiveCustomers();
     }
@@ -31,7 +29,7 @@ function CustomerController(){
     }
 
     this.updCustomer = async function(customerToUpdData) {
-        let updCustomer = readSerializedDate(customerToUpdData);
+        let updCustomer = readSerializedData(customerToUpdData);
         await customerModel.putCustomer(updCustomer, globalIdCustomer);
         this.getCustomer(globalIdCustomer);
     }
@@ -42,13 +40,10 @@ function CustomerController(){
     }
 }
 
-function readSerializedDate(customer) {
+function readSerializedData(customer) {
     let newCustomer = {}
     customer.forEach(element => {
         switch (element.name) {
-            case "numIdent":
-                newCustomer['numIdent'] = element.value;
-                break;
             case "numIdent":
                 newCustomer['numIdent'] = element.value;
                 break;

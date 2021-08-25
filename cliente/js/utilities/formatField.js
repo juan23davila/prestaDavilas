@@ -117,5 +117,19 @@ function formatPercentage(input, blur) {
   input.val(input_val);
 }
 
+/**
+ * Converts dd/mmm/yyyy -> yyyy-mm-dd
+ * @param {string} dateA 
+ * @returns date to save un MySql
+ */
+function getDateSQLFormat(dateA) {
+  let meses = {"Ene":01, "Feb":02, "Mar":03, "Apr":04, "May":05, "Jun":06, "Jul":07, "Ago":08, "Sep":09, "Oct":10, "Nov":11, "Dic":12};
+  let dateB = dateA;
+  dateB = dateB.replace(dateA.substring(3,6), meses[dateA.substring(3,6)]);
+  dateB = dateB.replaceAll("/", "-");
+  dateB = dateB.split("-").reverse().join("-");
+  return dateB;
+}
+
 
 

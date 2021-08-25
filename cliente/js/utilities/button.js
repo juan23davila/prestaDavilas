@@ -112,8 +112,7 @@ function ButtonsUtilities() {
       $('#createLoanForm').submit(function(event){
         event.preventDefault();
         let loanNewData = $('#createLoanForm').serializeArray();
-        console.log(loanNewData);
-        //customerController.setNewCustomer(userNewData);
+        loanController.setNewLoan(loanNewData, customerId);
       });
     });
   }
