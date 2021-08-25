@@ -1,5 +1,3 @@
-//require("../modelo/modeloCliente");
-
 const loanController = new LoanController();
 const customerModel = new ModeloCliente();
 let navbarUtilities = new NavbarUtilities();
