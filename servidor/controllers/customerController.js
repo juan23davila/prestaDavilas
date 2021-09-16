@@ -99,7 +99,7 @@ function insCustomer(req, res){
     connection.query('SELECT * FROM Customer WHERE numIdent = '+numIdent,
     function(errorQuery, resultQuery, fieldsQuery){
         if(errorQuery){
-            return res.status(500).json("Error al consultar si existia cliente en insCustomer: "+error);
+            return res.status(500).json("Error al consultar si existia cliente en insCustomer: "+errorQuery);
         }
         if(resultQuery.length > 0){
             return res.status(422).json("Ya existe un cliente con el número de documento "+numIdent);
