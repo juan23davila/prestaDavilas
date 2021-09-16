@@ -17,7 +17,7 @@ function ModeloCliente()
                 var tableUtilities = new TableUtilities();
                 var contentTable = tableUtilities.createTable(tableHeader,attrs,clientes, idTable, nameTR);
                 $('#content2').append(contentTable);
-                tableUtilities.createEventClick(idTable);
+                tableUtilities.createEventClickCutomer(idTable);
             }
         ).fail(function(response, status, xhr){
             if(response.status == 404){

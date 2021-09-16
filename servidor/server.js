@@ -25,6 +25,7 @@ app.put('/activateCustomer/:idCustomer', customerController.activateCustomer);
 // Todo lo de Prestamos
 app.get('/loansbycustomer/:idCustomer', loanController.getLoansByCustomerId);
 app.post('/loan', loanController.insLoan);
+app.get('/loan/:idLoan', loanController.getLoanById);
 
 var port = '8080';
 var ip = '0.0.0.0';

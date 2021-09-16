@@ -57,11 +57,23 @@ function TableUtilities(){
     return content;
   }
 
-  this.createEventClick = function(idTable) {
+  this.createEventClickCutomer = function(idTable) {
     let customerController = new CustomerController;
     $('#'+idTable+' tr').click(function(){
       let idUser = $(this).attr('name');
       customerController.getCustomer(idUser);
+    });
+  }
+
+  /**
+   * Obtiene información del préstamo
+   * @param {number} idTable 
+   */
+  this.createEventClickLoan = function(idTable) {
+    let loanController = new LoanController;
+    $('#'+idTable+' tr').click(function(){
+      let idLoan = $(this).attr('name');
+      loanController.getLoan(idLoan);
     });
   }
 
@@ -71,7 +83,7 @@ function TableUtilities(){
       case "s": // string, no format
         return data
       case "d": // date
-        return this.processDate(data);
+        return processDate(data);
       case "t": // time
         let timeDetail = getMonthsDaysBetweenDates(parseInt(data), iniDate);
         qMonths = timeDetail[1];
@@ -90,15 +102,6 @@ function TableUtilities(){
         return data;
     }
   }
-
-  this.processDate = function(data){
-    var date = new Date(data * 1000);
-    iniDate = date;
-    dia_mes = date.getDate(); //dia del mes
-    mes = date.getMonth() + 1;
-    anio = date.getFullYear();
-    return dia_mes+"/"+nombres_meses[mes - 1]+"/"+anio;
-  }
 }
 
 /**
@@ -113,19 +116,4 @@ function calculateInterest(){
     monthCost *= qMonths;
   }
   return monthCost;
-}
-
-/**
- * Da formato moneda a un valor.
- * @param {number} value 
- * @returns valor formateado a moneda.
- */
-function formatToMoney(value) {
-  let formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0
-  });
-
-  return formatter.format(value);
 }

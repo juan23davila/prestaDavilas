@@ -126,6 +126,36 @@ function insLoan(req, res) {
     });
 }
 
+/**
+ * Get loanInfo by id
+ */
+ function getLoanById(req, res){
+    var loanId = req.params.idLoan;
+    var getLoanByIdQuery =  "SELECT valueNow,\n"+
+                            "        UNIX_TIMESTAMP(payUntil) payUntil,\n"+
+                            "        percentage,\n"+
+                            "        mortage_number,\n"+
+                            "        address,\n"+
+                            "        notary,\n"+
+                            "        comments\n"+
+                            "FROM Loan, Mortage_data\n"+
+                            "WHERE idLoan = "+loanId+"\n"+
+                            "AND idLoan = Loan_idLoan";
+
+    connection.query(getLoanByIdQuery, function(error, result, fields){
+        if(error){
+            console.log("Hubo un error al obtener información del prestamo "+loanId, error.message);
+            return res.status(500).send("Hubo un error en la consulta getLoanById (Server)");
+        }
+        
+        if(result.length == 0){
+            return res.status(404).json("No existe préstamo con el identificador "+loanId);
+        }
+        
+        res.json(result);
+    });
+}
+
 
 /**
  * add n months to exired date
@@ -137,5 +167,6 @@ function addMonthsPayUntil(idLoan, nMonths){
 
 module.exports = {
     getLoansByCustomerId : getLoansByCustomerId,
-    insLoan : insLoan
+    insLoan : insLoan,
+    getLoanById : getLoanById
 }

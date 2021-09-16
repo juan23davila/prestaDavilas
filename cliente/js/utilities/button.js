@@ -108,7 +108,7 @@ function ButtonsUtilities() {
       });
 
       
-      // Se crea la opcion de submit del formulario de crear
+      // Se crea la opcion de submit del formulario de crear prestamo
       $('#createLoanForm').submit(function(event){
         event.preventDefault();
         let loanNewData = $('#createLoanForm').serializeArray();
@@ -116,4 +116,21 @@ function ButtonsUtilities() {
       });
     });
   }
+
+
+  // boton agregar pago
+  this.createAddPaymentButton = function (idLoan) {
+    var addCustomerButton = 
+    '<a class="right linkOpt modal-trigger" id="crPaymentBtn" href="#modalFormGeneral">\n'+
+      '<i class="fas fa-money-bill-alt fa-lg"></i>\n'+
+      'Agregar Pago\n'+
+    '</a>';
+    $('#actionSection2').append(addCustomerButton);
+
+    $('#crPaymentBtn').click(function(){
+      $('#modalGeneralContent').text("");
+      $('#modalGeneralContent').append(modalContentUtilities.crPaymentForm());
+    });
+  }
+
 }

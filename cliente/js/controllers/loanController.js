@@ -1,4 +1,6 @@
 const loanModel = new LoanModel();
+let globalIdLoan = 0;
+const paymentController = new PaymentController();
 
 function LoanController(){
   //get list active loans
@@ -22,6 +24,15 @@ function LoanController(){
     newLoan['custId'] = customerId;
     await loanModel.postLoanFromUser(newLoan);
     //this.getLoansFromUserId(customerId);
+  }
+
+
+  // Get complete info from loan
+  this.getLoan = async function (idLoan) {
+    globalIdLoan = idLoan;
+    navbarUtilities.removeBottonMarignNavBar();
+    await loanModel.getLoanById(globalIdLoan);
+    paymentController.getPaymentsFromLoanId(globalIdLoan);
   }
 }
 

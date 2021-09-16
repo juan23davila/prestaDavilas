@@ -110,7 +110,7 @@ function ModalContentUtilities()
     return content;
   }
 
-  this.crLoanForm = function(params) {
+  this.crLoanForm = function() {
     let content = ''
     content += '<h4>Agrega Contrato</h4>\n';
     content += '<br>\n';
@@ -129,6 +129,19 @@ function ModalContentUtilities()
     content += createField(1, 'gavel', 'text', 'Notaría', 'notary');
     // Comentario
     content += createTextArea(2, 'far fa-comment', 'text', 'Comentario', 'comment');
+    // submitButton
+    content += '    <div class="modal-footer">\n';
+    content += '      <input type="submit" value="Agregar" class="modal-close waves-effect waves-light btn-flat">\n';
+    content += '    </div>\n';
+    content += '  </form>\n';
+
+    return content;
+  }
+
+  this.crPaymentForm = function () {
+    let content = ''
+    content += '<h4>Agrega Pago</h4>\n';
+    content += '<br>\n';
     // submitButton
     content += '    <div class="modal-footer">\n';
     content += '      <input type="submit" value="Agregar" class="modal-close waves-effect waves-light btn-flat">\n';

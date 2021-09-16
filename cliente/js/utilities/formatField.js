@@ -9,10 +9,8 @@ function formatPer(n) {
   return n.replace(/\D/g, "");
 }
 
-
+// Used to forms
 function formatCurrency(input, blur) {
-  // appends $ to value, validates decimal side
-  // and puts cursor back in right position.
 
   // get input value
   var input_val = input.val();
@@ -129,6 +127,37 @@ function getDateSQLFormat(dateA) {
   dateB = dateB.replaceAll("/", "-");
   dateB = dateB.split("-").reverse().join("-");
   return dateB;
+}
+
+
+/**
+ * Converts to $0,000,000.
+ * @param {number} value 
+ * @returns valor formateado a moneda.
+ */
+ function formatToMoney(value) {
+  let formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  });
+
+  return formatter.format(value);
+}
+
+
+/**
+ * Format from UNIX_TIMESTAMP to dd/mmm/yyyy
+ * @param {number} dateUnix 
+ * @returns dd/mmm/yyyy
+ */
+ function processDate (dateUnix){
+  var date = new Date(dateUnix * 1000);
+  iniDate = date;
+  dia_mes = date.getDate(); //dia del mes
+  mes = date.getMonth() + 1;
+  anio = date.getFullYear();
+  return dia_mes+"/"+nombres_meses[mes - 1]+"/"+anio;
 }
 
 
