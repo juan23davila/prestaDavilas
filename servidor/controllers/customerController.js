@@ -7,7 +7,7 @@ function allCustomers(req, res){
     var getAllCustomersQuery = "SELECT * FROM Customer\n"+
                                "WHERE active = 'Y'\n"+
                                "order by custName"; 
-    connection.query(getAllCustomersQuery, function(error, result, fields){
+    connection().query(getAllCustomersQuery, function(error, result, fields){
         if(error){
             console.log("Hubo un error al obtener la lista de clientes", error.message);
             return res.status(404).send("Hubo un error en la consulta allCustomers");
@@ -33,7 +33,7 @@ function getCustomerById(req, res){
     var getCustomerByIdQuery = "SELECT * FROM Customer\n"+
                                "WHERE idCustomer = "+customerId;
 
-    connection.query(getCustomerByIdQuery, function(error, result, fields){
+    connection().query(getCustomerByIdQuery, function(error, result, fields){
         if(error){
             console.log("Hubo un error al obtener información del cliente "+customerId, error.message);
             return res.status(500).send("Hubo un error en la consulta getCustomerById");
@@ -96,7 +96,7 @@ function insCustomer(req, res){
                                 address+",\n"+
                                 email+")";
                                 
-    connection.query('SELECT * FROM Customer WHERE numIdent = '+numIdent,
+    connection().query('SELECT * FROM Customer WHERE numIdent = '+numIdent,
     function(errorQuery, resultQuery, fieldsQuery){
         if(errorQuery){
             return res.status(500).json("Error al consultar si existia cliente en insCustomer: "+errorQuery);
@@ -104,7 +104,7 @@ function insCustomer(req, res){
         if(resultQuery.length > 0){
             return res.status(422).json("Ya existe un cliente con el número de documento "+numIdent);
         }
-        connection.query(insCustomerQuery, function(error, result, fields){
+        connection().query(insCustomerQuery, function(error, result, fields){
             if(error){
                 console.log("Hubo un error al insertar cliente nuevo", error.message);
                 return res.status(500).send("Hubo un error en la consulta insCustomer: "+error);
@@ -140,7 +140,7 @@ function updCustomer(req, res){
                            "    email = "+email+"\n"+
                            "WHERE Customer.idCustomer = "+idCustomer;
 
-    connection.query(updCustomerQuery,
+    connection().query(updCustomerQuery,
         function (error, results, fields){
             if(error){
                 console.log("Hubo un error al actualizar el cliente: "+idCustomer, error.message);
@@ -160,7 +160,7 @@ function deactivateCustomer(req, res){
     var updCustomerQuery = "UPDATE Customer SET active = 'N'\n"+
                            "WHERE Customer.idCustomer = "+idCustomer;
 
-    connection.query(updCustomerQuery,
+    connection().query(updCustomerQuery,
         function (error, results, fields){
             if(error){
                 console.log("Hubo un error al desactivar el cliente: "+idCustomer, error.message);
@@ -180,7 +180,7 @@ function activateCustomer(req, res){
     var updCustomerQuery = "UPDATE Customer SET active = 'Y'\n"+
                            "WHERE Customer.idCustomer = "+idCustomer;
 
-    connection.query(updCustomerQuery,
+    connection().query(updCustomerQuery,
         function (error, results, fields){
             if(error){
                 console.log("Hubo un error al activar el cliente: "+idCustomer, error.message);

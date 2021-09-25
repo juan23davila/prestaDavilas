@@ -1,0 +1,13 @@
+Tareas por completar
+
+- investigar como se crea una columna nueva en una tabla
+- Crear el script para esta modificiación
+- ejecutar el script
+- hacer pruebas de ins, get
+- modificar el servicio que obtiene información de préstamo
+- modificar la interfaz que muestra el saldo a favor
+- Diseñar la interfaz para agregar un pago, por mes, por plata, debe mostrar meses pagados, saldo a favor, abono a capital
+- hacer funcional la calculadora de pago y el índice que me dice por cual via se hará el pago.
+- crear el servicio para insertar el pago
+- crear el servicio para obtener los pagos por prestamo
+- crear la interfaz que muestra todos estos pagos.

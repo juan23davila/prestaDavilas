@@ -1,11 +1,19 @@
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    port: '8889',
-    user: 'root',
-    password: 'root',
-    database: 'prestamos_db'
-});
+let connection;
 
-module.exports = connection;
+const getMySQLConnection = function(){
+
+    if(!connection) {
+       connection = mysql.createConnection({
+            host: 'localhost',
+            port: '8889',
+            user: 'root',
+            password: 'root',
+            database: 'prestamos_db'
+        });
+    }
+    return connection;
+    
+}
+module.exports = getMySQLConnection;

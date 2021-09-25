@@ -8,8 +8,7 @@ var connection = require('../lib/connectionBD');
 function getLoansByCustomerId(req, res) {
     var idCustomer = req.params.idCustomer; // id Customer
 
-    var loansByCustomerQuery = 
-                               "SELECT idLoan, \n"+
+    var loansByCustomerQuery = "SELECT idLoan, \n"+
                                "       address, \n"+
                                "       valueNow, \n"+
                                "       UNIX_TIMESTAMP(payUntil) payUntil, \n"+
@@ -19,7 +18,7 @@ function getLoansByCustomerId(req, res) {
                                "ON Loan.idLoan = Mortage_data.Loan_idLoan \n"+
                                "WHERE Loan.custId = "+idCustomer;
 
-    connection.query(loansByCustomerQuery,
+    connection().query(loansByCustomerQuery,
         function (error, results){
             if(error){
                 return res.status(500).json("Error al obtener los los présamos de un cliente: "+error);
@@ -92,7 +91,7 @@ function insLoan(req, res) {
 
     
                                 
-    connection.query(insLoanQuery, function(error, result, fields){
+    connection().query(insLoanQuery, function(error, result, fields){
         if(error){
             console.log("Hubo un error al insertar prestamo nuevo", error.message);
             return res.status(500).send("Hubo un error en la consulta insLoan_Loan: "+error);
@@ -114,7 +113,7 @@ function insLoan(req, res) {
                                     result.insertId+")";
 
 
-        connection.query(insMortageInfoQuery, function(error2, result2, fields2){
+        connection().query(insMortageInfoQuery, function(error2, result2, fields2){
             if(error2){
                 console.log("Hubo un error al insertar info de la hipoteca", error.message);
                 return res.status(500).send("Hubo un error en la consulta insLoan_mortageDate: "+error);
@@ -142,7 +141,7 @@ function insLoan(req, res) {
                             "WHERE idLoan = "+loanId+"\n"+
                             "AND idLoan = Loan_idLoan";
 
-    connection.query(getLoanByIdQuery, function(error, result, fields){
+    connection().query(getLoanByIdQuery, function(error, result, fields){
         if(error){
             console.log("Hubo un error al obtener información del prestamo "+loanId, error.message);
             return res.status(500).send("Hubo un error en la consulta getLoanById (Server)");
