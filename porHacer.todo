@@ -1,8 +1,9 @@
 Tareas por completar
 
-- investigar como se crea una columna nueva en una tabla
-- Crear el script para esta modificiación
+- investigar como se crea una columna nueva en una tabla @done
+- Crear el script para esta modificiación @done
 - ejecutar el script
+- validar que se insertó de manera correcta
 - hacer pruebas de ins, get
 - modificar el servicio que obtiene información de préstamo
 - modificar la interfaz que muestra el saldo a favor
